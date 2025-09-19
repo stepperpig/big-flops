@@ -60,9 +60,19 @@ first_all_temperatures = all_temperatures[stations[0]]
 
 # To use %timeit, use the iPython REPL
 # %timeit (-10.7 in first_all_temperatures)
-# [output]: 92.3 μs ± 386 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+# 92.3 μs ± 386 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 
 # Our search time for an element that doesn't exist is noticeably
 # slower! Why?
 # %timeit (-100 in first_all_temperatures)
-# [output]: 787 μs ± 3.2 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+# 787 μs ± 3.2 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+
+# To complete this search, the "in" operator has to sequentially search from the 
+# beginning of the list. This is obviously inefficient for worst-case scenarios.
+
+# How about we convert our list into a set?
+set_first_all_temperatures = set(first_all_temperatures)
+# %timeit (-10.7 in set_first_all_temperatures)
+# 18.5 ns ± 0.0647 ns per loop (mean ± std. dev. of 7 runs, 100,000,000 loops each)
+# %timeit (-100 in set_first_all_temperatures)
+# 10.9 ns ± 0.479 ns per loop (mean ± std. dev. of 7 runs, 100,000,000 loops each)
