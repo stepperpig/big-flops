@@ -20,6 +20,7 @@ def get_locations():
 
 # Use the haversine formula to calculate the distance
 # between two coordinates.
+@profile
 def get_distance(p1, p2):
     lat1, lon1 = p1
     lat2, lon2 = p2
