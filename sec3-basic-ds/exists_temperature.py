@@ -76,3 +76,24 @@ set_first_all_temperatures = set(first_all_temperatures)
 # 18.5 ns ± 0.0647 ns per loop (mean ± std. dev. of 7 runs, 100,000,000 loops each)
 # %timeit (-100 in set_first_all_temperatures)
 # 10.9 ns ± 0.479 ns per loop (mean ± std. dev. of 7 runs, 100,000,000 loops each)
+
+# But why is it faster? Two reasons... the first is that sets collapse
+# all repeated values. The other has to do with complexity. Let's explore that.
+# What would happen if there was no repetition, i.e., list and set are the same
+# size?
+a_list_range = list(range(100000))
+a_set_range = set(a_list_range)
+# %timeit 50000 in a_list_range
+# 143 μs ± 286 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+# %timeit 50000 in a_set_range
+# 11.4 ns ± 0.325 ns per loop (mean ± std. dev. of 7 runs, 100,000,000 loops each)
+# %timeit 500000 in a_list_range
+# 287 μs ± 582 ns per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+# %timeit 500000 in a_set_range
+# 10.6 ns ± 0.6 ns per loop (mean ± std. dev. of 7 runs, 100,000,000 loops each)
+
+# Hmm, still faster...?
+
+# It's probably important to note that in CPython a set is implemented with a hash.
+# You can see how much faster it is to perform constant-time lookups instead of linear
+# searches every time!
