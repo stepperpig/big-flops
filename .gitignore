@@ -1,2 +1,4 @@
 venv/
 sec1-io-cpu/*.csv
+.DS_Store
+sec1-io-cpu/.DS_Store
